@@ -18,6 +18,8 @@ RFID-RC522 = https://www.elecrow.com/download/MFRC522%20Datasheet.pdf
 
 SERVO-SG90 = http://www.ee.ic.ac.uk/pcheung/teaching/DE1_EE/stores/sg90_datasheet.pdf
 
+CHAPA = https://www.lowes.com.mx/cerrojos/4405-cerrojo-yale-sencillo-llave-mariposa-laton.html
+
 
 ### PINOUT DE RFID-RC522 A NODEMCU
 
