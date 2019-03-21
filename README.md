@@ -19,7 +19,7 @@ RFID-RC522 = https://www.elecrow.com/download/MFRC522%20Datasheet.pdf
 SERVO-SG90 = http://www.ee.ic.ac.uk/pcheung/teaching/DE1_EE/stores/sg90_datasheet.pdf
 
 
-PINOUT DE RFID-RC522 A NODEMCU
+### PINOUT DE RFID-RC522 A NODEMCU
 
 RFID       NODEMCU
 
@@ -32,7 +32,7 @@ MOSI       D7
 SCK        D5
 SDA        D2
 
-PINOUT DE RGBLEB A NODEMCU
+### PINOUT DE RGBLEB A NODEMCU
 
 RGB       NODEMCU
 
@@ -41,7 +41,7 @@ GROUND    GND
 GREEN     D3
 BLUE      D0
 
-PINOUT DE SERVO-SG90 A NODEMCU
+### PINOUT DE SERVO-SG90 A NODEMCU
 
 SERVO     NODEMCU
 
