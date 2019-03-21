@@ -21,30 +21,30 @@ SERVO-SG90 = http://www.ee.ic.ac.uk/pcheung/teaching/DE1_EE/stores/sg90_datashee
 
 ### PINOUT DE RFID-RC522 A NODEMCU
 
-RFID       NODEMCU
-
-3.3V       3V3
-RST        D1
-GND        GND
-IRQ        
-MISO       D6
-MOSI       D7
-SCK        D5
-SDA        D2
+| RFID | NODEMCU |
+|:----:| :-----: |
+| 3.3V | 3V3     |
+| RST  | D1      |
+| GND  | GND     |
+| IRQ  |         |
+| MISO | D6      |
+| MOSI | D7      |
+| SCK  | D5      |
+| SDA  | D2      |
 
 ### PINOUT DE RGBLEB A NODEMCU
 
-RGB       NODEMCU
-
-RED       D8
-GROUND    GND
-GREEN     D3
-BLUE      D0
+| RGB   | NODEMCU |
+|:-----:| :-----: |
+| RED   | D8      |
+| GROUND| GND     |
+| GREEN | D3      |
+| BLUE  | D0      |
 
 ### PINOUT DE SERVO-SG90 A NODEMCU
 
-SERVO     NODEMCU
-
-NARANJA   D4
-ROJO      3V3
-CAFE      GND
+| SERVO   | NODEMCU |
+|:------: | :-----: |
+| NARANJA |  D4     |
+| ROJO    |  3V3    |
+| CAFE    |  GND    |
