@@ -36,7 +36,7 @@ Servo servo;
 
 // Librerias y variables de comunicación (WiFi)
 #include <ESP8266WiFi.h>
-const char ssid[] = "ROIZ";
+const char ssid[] = "Alex cel";
 const char pass[] = "holahumano";
 WiFiServer server(80); // Servidor montado en puerto 80
 
