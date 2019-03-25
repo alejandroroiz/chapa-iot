@@ -22,6 +22,7 @@
 #define SS_PIN 4 
 #define RST_PIN 5
 MFRC522 mfrc522(SS_PIN, RST_PIN);
+#define CARTA_CORRECTA "30 1B A2 19"
 
 // Librerias y variables de Servo-SG90
 #include <Servo.h>
@@ -33,10 +34,14 @@ Servo servo;
 #define AZUL D0
 #define VERDE D3
 
-void setup() 
-{
-  // Iniciar patrones de comunicación
-  Serial.begin(9600);   
+// Librerias y variables de comunicación (WiFi)
+#include <ESP8266WiFi.h>
+const char ssid[] = "ROIZ";
+const char pass[] = "holahumano";
+WiFiServer server(80); // Servidor montado en puerto 80
+
+void setup() {
+  // Iniciar patrones de comunicación  
   SPI.begin();      
   mfrc522.PCD_Init();
   
@@ -48,63 +53,63 @@ void setup()
   pinMode(ROJO, OUTPUT);
   pinMode(AZUL, OUTPUT);
   pinMode(VERDE, OUTPUT);
-  digitalWrite(ROJO, LOW);
-  // El led azul nos demuestra que el circuito esta funcionando
-  digitalWrite(AZUL, HIGH);
-  digitalWrite(VERDE, LOW);
-  
-  Serial.println("Acerca tu carta al lector...");
-  Serial.println();
+  inicializaLeds();
+
+  connect();
 }
 
-void loop() 
-{
-  digitalWrite(AZUL, HIGH);
-  digitalWrite(ROJO, LOW);
-  digitalWrite(VERDE, LOW);
+void loop() {
+
+  inicializaLeds();
   
   // Look for new cards
-  if ( ! mfrc522.PICC_IsNewCardPresent()) 
-  {
-    return;
-  }
+  if ( ! mfrc522.PICC_IsNewCardPresent()) { return; }
   // Select one of the cards
-  if ( ! mfrc522.PICC_ReadCardSerial()) 
-  {
-    return;
-  }
-  //Show UID on serial monitor
-  Serial.print("UID tag :");
+  if ( ! mfrc522.PICC_ReadCardSerial()) { return; }
   String content= "";
   byte letter;
-  for (byte i = 0; i < mfrc522.uid.size; i++) 
-  {
-     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
-     Serial.print(mfrc522.uid.uidByte[i], HEX);
-     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
-     content.concat(String(mfrc522.uid.uidByte[i], HEX));
+  for (byte i = 0; i < mfrc522.uid.size; i++) {
+    content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+    content.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
-  Serial.println();
-  Serial.print("Message : ");
   content.toUpperCase();
-  if (content.substring(1) == "30 1B A2 19")
-  {
-    digitalWrite(AZUL, LOW);
-    digitalWrite(ROJO, LOW);
-    digitalWrite(VERDE, HIGH);
-    Serial.println("Authorized access");
-    Serial.println();
-    servo.write(90);
-    delay(3000);
-    servo.write(0);
-    delay(3000);
+  if (content.substring(1) == CARTA_CORRECTA) { correcto(); } 
+  else { equivocado(); }
+}
+
+void connect() {
+  Serial.print("checking wifi...");
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(1000);
   }
- else   {
+
+  Serial.println("");
+  Serial.println("WiFi connected.");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  server.begin();
+}
+
+void inicializaLeds() {
+  digitalWrite(AZUL, HIGH); // El led azul nos demuestra que el circuito esta funcionando
+  digitalWrite(ROJO, LOW);
+  digitalWrite(VERDE, LOW);
+}
+
+void correcto() {
+  digitalWrite(AZUL, LOW);
+  digitalWrite(ROJO, LOW);
+  digitalWrite(VERDE, HIGH);
+  servo.write(90);
+  delay(3000);
+  servo.write(0);
+  delay(1000);
+}
+
+void equivocado() {
   digitalWrite(AZUL, LOW);
   digitalWrite(VERDE, LOW);
   digitalWrite(ROJO, HIGH);
-  Serial.println("Access denied");
-  Serial.println();
-  delay(3000);
- }
-} 
+  delay(1000);
+}
