@@ -36,12 +36,12 @@ Servo servo;
 
 // Librerias y variables de comunicación (WiFi)
 #include <ESP8266WiFi.h>
-const char ssid[] = "Alex cel";
+const char ssid[] = "ROIZ";
 const char pass[] = "holahumano";
-WiFiServer server(80); // Servidor montado en puerto 80
 
 void setup() {
-  // Iniciar patrones de comunicación  
+  // Iniciar patrones de comunicación
+  Serial.begin(9600);   
   SPI.begin();      
   mfrc522.PCD_Init();
   
@@ -80,15 +80,16 @@ void loop() {
 void connect() {
   Serial.print("checking wifi...");
   while (WiFi.status() != WL_CONNECTED) {
+    digitalWrite(AZUL, HIGH);
     Serial.print(".");
     delay(1000);
+    digitalWrite(AZUL, LOW);
   }
 
   Serial.println("");
   Serial.println("WiFi connected.");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-  server.begin();
 }
 
 void inicializaLeds() {
