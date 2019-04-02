@@ -34,11 +34,6 @@ Servo servo;
 #define AZUL D0
 #define VERDE D3
 
-// Librerias y variables de comunicación (WiFi)
-#include <ESP8266WiFi.h>
-const char ssid[] = "ROIZ";
-const char pass[] = "holahumano";
-
 void setup() {
   // Iniciar patrones de comunicación
   Serial.begin(9600);   
@@ -54,8 +49,6 @@ void setup() {
   pinMode(AZUL, OUTPUT);
   pinMode(VERDE, OUTPUT);
   inicializaLeds();
-
-  connect();
 }
 
 void loop() {
@@ -75,21 +68,6 @@ void loop() {
   content.toUpperCase();
   if (content.substring(1) == CARTA_CORRECTA) { correcto(); } 
   else { equivocado(); }
-}
-
-void connect() {
-  Serial.print("checking wifi...");
-  while (WiFi.status() != WL_CONNECTED) {
-    digitalWrite(AZUL, HIGH);
-    Serial.print(".");
-    delay(1000);
-    digitalWrite(AZUL, LOW);
-  }
-
-  Serial.println("");
-  Serial.println("WiFi connected.");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
 }
 
 void inicializaLeds() {
