@@ -42,7 +42,7 @@ void setup() {
   
   // Iniciar servo
   servo.attach(SERVO_PIN);
-  servo.write(0);
+  servo.write(180);
 
   // Iniciar LEDS
   pinMode(ROJO, OUTPUT);
@@ -80,9 +80,9 @@ void correcto() {
   digitalWrite(AZUL, LOW);
   digitalWrite(ROJO, LOW);
   digitalWrite(VERDE, HIGH);
-  servo.write(90);
-  delay(3000);
   servo.write(0);
+  delay(3000);
+  servo.write(180);
   delay(1000);
 }
 
