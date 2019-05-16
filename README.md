@@ -16,7 +16,7 @@ LED RGB (COMMON GROUND) = https://www.sparkfun.com/datasheets/Components/YSL-R59
 
 RFID-RC522 = https://www.elecrow.com/download/MFRC522%20Datasheet.pdf
 
-SERVO-SG90 = http://www.ee.ic.ac.uk/pcheung/teaching/DE1_EE/stores/sg90_datasheet.pdf
+SERVO-HSR8498HB = https://robosavvy.com/Builders/i-Bot/HSR8498HB%20Servo.pdf
 
 CHAPA = https://www.lowes.com.mx/cerrojos/4405-cerrojo-yale-sencillo-llave-mariposa-laton.html
 
